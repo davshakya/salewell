@@ -1,19 +1,25 @@
-from ftplib import FTP_TLS
-import ssl
 import yaml
+from ftplib import FTP
+import json
 
+
+# Load config (assuming config is loaded as a dictionary from JSON or similar)
 with open("config.yml", "r") as file:
     config = yaml.safe_load(file)
 
-# Create a less strict SSL context
-context = ssl.create_default_context()
-context.set_ciphers("DEFAULT:@SECLEVEL=1")  # <-- allow small DH keys
-ftp = FTP_TLS(context=context)
-ftp.connect("ftpupload.net", 21)
+ftp = FTP(config["ftp_host"])  # Use plain FTP, not FTP_TLS
 ftp.login(config["ftp_user"], config["ftp_pwd"])
-ftp.prot_p()  # Protect data connection
-ftp.cwd("/salewell.co.in/htdocs")
-with open("index.html", "rb") as file:
-    ftp.storbinary("STOR index.html", file)
+
+# Optional: navigate to directory
+# ftp.cwd('/some/path')
+
+# Example operation: list files
+ftp.retrlines('LIST')
+# Upload index.html
+filename = 'index.html'
+with open("myproject/templates/index.html", "rb") as file:
+    ftp.storbinary(f"STOR {filename}", file)
+
+print(f"{filename} uploaded successfully.")
+# Always close the connection when done
 ftp.quit()
-print("Upload successful.")
