@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+    <div class="page-shell product-detail">
+        <div class="product-gallery">
+            <div class="product-gallery__hero">
+                <img src="{% static product.image %}" alt="{{ product.name }}">
+            </div>
+            <div class="thumb-grid">
+                {% for gallery_image in product.gallery %}
+                    <img src="{% static gallery_image %}" alt="{{ product.name }}">
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="detail-panel">
+            <p class="section-kicker">{{ product.category|title }} / {{ product.product_type }}</p>
+            <h1>{{ product.name }}</h1>
+            <p class="detail-panel__lead">{{ product.description }}</p>
+
+            <div class="price-row price-row--large">
+                <strong>Rs. {{ product.price|floatformat:0 }}</strong>
+                <span>Rs. {{ product.compare_at_price|floatformat:0 }}</span>
+            </div>
+
+            <div class="chip-list">
+                {% for size in product.sizes %}
+                    <span class="chip">Size {{ size }}</span>
+                {% endfor %}
+            </div>
+
+            <ul class="detail-list">
+                {% for highlight in product.highlights %}
+                    <li>{{ highlight }}</li>
+                {% endfor %}
+            </ul>
+
+            <form method="post" action="{% url 'add_to_cart' product.slug %}" class="detail-form">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{% url 'product_detail' product.slug %}">
+                <div class="field field--compact">
+                    <label for="{{ add_to_cart_form.quantity.id_for_label }}">Quantity</label>
+                    {{ add_to_cart_form.quantity }}
+                </div>
+                <button class="button-primary" type="submit">Add to Cart</button>
+                <a class="button-secondary" href="{% url 'checkout' %}">Go to Checkout</a>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="section section--soft">
+    <div class="page-shell">
+        <div class="section-heading">
+            <p class="section-kicker">Related Products</p>
+            <h2>Similar styles from the same collection.</h2>
+        </div>
+        <div class="product-grid">
+            {% for related in related_products %}
+                <article class="product-card">
+                    <a class="product-card__media" href="{% url 'product_detail' related.slug %}">
+                        <img src="{% static related.image %}" alt="{{ related.name }}">
+                    </a>
+                    <div class="product-card__content">
+                        <span class="badge">{{ related.badge }}</span>
+                        <h3><a href="{% url 'product_detail' related.slug %}">{{ related.name }}</a></h3>
+                        <p>{{ related.short_description }}</p>
+                        <div class="price-row">
+                            <strong>Rs. {{ related.price|floatformat:0 }}</strong>
+                            <span>Rs. {{ related.compare_at_price|floatformat:0 }}</span>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
