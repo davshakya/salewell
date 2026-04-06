@@ -30,7 +30,7 @@ def index(request):
             lead_form.save()
             messages.success(
                 request,
-                "Your catalogue request has been saved. SaleWell can now follow up with product suggestions.",
+                "Your request has been received. SaleWell will follow up with suitable styles and sizing help.",
             )
             return HttpResponseRedirect(f"{reverse('index')}#catalogue-request")
     else:
@@ -41,7 +41,7 @@ def index(request):
         "index.html",
         build_context(
             request,
-            page_title="SaleWell | Clothing E-commerce Store",
+            page_title="SaleWell | Fashion for Women and Men",
             lead_form=lead_form,
             featured_products=featured_products(),
             women_products=list_products("women")[:3],
