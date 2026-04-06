@@ -1,2 +1,10 @@
+.idea/
+.venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+.env
+.env.*
+myproject/staticfiles/
 config.yml
-.idea

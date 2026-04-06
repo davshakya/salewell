@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/salewellco/salewell_app
+    - /bin/mkdir -p "$DEPLOYPATH"
+    - /bin/cp passenger_wsgi.py "$DEPLOYPATH/passenger_wsgi.py"
+    - /bin/cp requirements.txt "$DEPLOYPATH/requirements.txt"
+    - /bin/cp -R myproject "$DEPLOYPATH"
