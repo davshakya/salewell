@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+    <div class="page-shell">
+        <div class="section-heading section-heading--left">
+            <p class="section-kicker">Cart</p>
+            <h1>Your selected products</h1>
+            <p>Review quantities, update your cart, and continue to checkout.</p>
+        </div>
+
+        {% if cart_data.items %}
+            <div class="cart-layout">
+                <form method="post" action="{% url 'cart' %}" class="line-items">
+                    {% csrf_token %}
+                    {% for item in cart_data.items %}
+                        <article class="line-item">
+                            <img src="{% static item.product.image %}" alt="{{ item.product.name }}">
+                            <div class="line-item__content">
+                                <div>
+                                    <p class="section-kicker">{{ item.product.category|title }} / {{ item.product.product_type }}</p>
+                                    <h2>{{ item.product.name }}</h2>
+                                    <p>{{ item.product.short_description }}</p>
+                                </div>
+                                <div class="line-item__meta">
+                                    <label>
+                                        Quantity
+                                        <input class="quantity-input" type="number" min="0" name="qty_{{ item.product.slug }}" value="{{ item.quantity }}">
+                                    </label>
+                                    <div class="price-block">
+                                        <strong>Rs. {{ item.line_total|floatformat:0 }}</strong>
+                                        <span>Rs. {{ item.product.price|floatformat:0 }} each</span>
+                                    </div>
+                                    <button class="text-button" formaction="{% url 'remove_from_cart' item.product.slug %}" formmethod="post" type="submit">Remove</button>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                    <button class="button-secondary" type="submit">Update Cart</button>
+                </form>
+
+                <aside class="cart-summary">
+                    <h2>Order Summary</h2>
+                    <div class="summary-row">
+                        <span>Items</span>
+                        <strong>{{ cart_data.item_count }}</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <strong>Rs. {{ cart_data.subtotal|floatformat:0 }}</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <strong>
+                            {% if cart_data.shipping_fee %}
+                                Rs. {{ cart_data.shipping_fee|floatformat:0 }}
+                            {% else %}
+                                Free
+                            {% endif %}
+                        </strong>
+                    </div>
+                    <div class="summary-row summary-row--total">
+                        <span>Total</span>
+                        <strong>Rs. {{ cart_data.total|floatformat:0 }}</strong>
+                    </div>
+                    <p class="summary-note">Free shipping unlocks at Rs. {{ cart_data.free_shipping_threshold|floatformat:0 }}.</p>
+                    <a class="button-primary" href="{% url 'checkout' %}">Proceed to Checkout</a>
+                </aside>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <h2>Your cart is empty.</h2>
+                <p>Browse women&apos;s and men&apos;s products to start building your order.</p>
+                <div class="cta-row">
+                    <a class="button-primary" href="{% url 'women' %}">Shop Women</a>
+                    <a class="button-secondary" href="{% url 'men' %}">Shop Men</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

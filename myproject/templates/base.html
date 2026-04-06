@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page_title|default:"SaleWell" }}</title>
+    <meta name="description" content="SaleWell clothing store for men and women with collections, cart, checkout, and order tracking.">
+    <link rel="stylesheet" href="{% static 'assets/css/salewell-store.css' %}">
+</head>
+<body class="store-body">
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a class="brand-mark" href="{% url 'index' %}">
+                <span class="brand-mark__eyebrow">Clothing E-commerce</span>
+                <span class="brand-mark__title">SaleWell</span>
+            </a>
+
+            <nav class="site-nav" aria-label="Primary">
+                <a class="site-nav__link{% if request.path == '/' %} is-active{% endif %}" href="{% url 'index' %}">Home</a>
+                <a class="site-nav__link{% if request.path == '/women/' %} is-active{% endif %}" href="{% url 'women' %}">Women</a>
+                <a class="site-nav__link{% if request.path == '/men/' %} is-active{% endif %}" href="{% url 'men' %}">Men</a>
+                <a class="site-nav__link{% if request.path == '/orders/' %} is-active{% endif %}" href="{% url 'orders' %}">Orders</a>
+            </nav>
+
+            <a class="cart-pill" href="{% url 'cart' %}">
+                Cart
+                <span>{{ cart_count }}</span>
+            </a>
+        </div>
+    </header>
+
+    {% if messages %}
+        <div class="notice-stack page-shell">
+            {% for message in messages %}
+                <div class="notice notice--{{ message.tags|default:'info' }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="page-shell site-footer__inner">
+            <div>
+                <p class="section-kicker">SaleWell</p>
+                <h2>Designed for clothing discovery and checkout.</h2>
+                <p>Men&apos;s and women&apos;s collections, session cart, checkout flow, and saved orders in one compact Django store.</p>
+            </div>
+            <div class="footer-links">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'women' %}">Women</a>
+                <a href="{% url 'men' %}">Men</a>
+                <a href="{% url 'cart' %}">Cart</a>
+                <a href="{% url 'checkout' %}">Checkout</a>
+                <a href="{% url 'orders' %}">Orders</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

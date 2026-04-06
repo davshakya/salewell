@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="page-shell">
+        <div class="section-heading section-heading--left">
+            <p class="section-kicker">Orders</p>
+            <h1>Track or review saved orders</h1>
+            <p>Use your email or order number to find clothing orders placed through this site.</p>
+        </div>
+
+        {% if order_placed %}
+            <div class="notice notice--success">
+                Your order has been placed successfully. Use the saved order number below any time you want to review it again.
+            </div>
+        {% endif %}
+
+        <div class="form-card">
+            <form method="get" action="{% url 'orders' %}" class="checkout-form">
+                {% if order_lookup_form.non_field_errors %}
+                    {% for error in order_lookup_form.non_field_errors %}
+                        <p class="field-error">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="field-grid">
+                    {% for field in order_lookup_form %}
+                        <div class="field">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <p class="field-error">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <button class="button-primary" type="submit">Find Orders</button>
+            </form>
+        </div>
+
+        {% if show_results %}
+            <div class="order-list">
+                {% if orders %}
+                    {% for order in orders %}
+                        <article class="order-card">
+                            <div class="order-card__header">
+                                <div>
+                                    <p class="section-kicker">Order {{ order.order_number }}</p>
+                                    <h2>{{ order.customer_name }}</h2>
+                                    <p>{{ order.email }} | {{ order.phone }}</p>
+                                </div>
+                                <span class="status-pill">{{ order.get_status_display }}</span>
+                            </div>
+                            <div class="order-card__meta">
+                                <span>Placed on {{ order.created_at|date:"M d, Y" }}</span>
+                                <span>Total Rs. {{ order.total_amount|floatformat:0 }}</span>
+                                <span>{{ order.delivery_area }}</span>
+                            </div>
+                            <div class="order-items">
+                                {% for item in order.items.all %}
+                                    <div class="order-item-row">
+                                        <div>
+                                            <strong>{{ item.product_name }}</strong>
+                                            <span>{{ item.category|title }} / {{ item.product_type }}</span>
+                                        </div>
+                                        <strong>{{ item.quantity }} x Rs. {{ item.unit_price|floatformat:0 }}</strong>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <p class="order-address">{{ order.address_line1 }}, {% if order.address_line2 %}{{ order.address_line2 }}, {% endif %}{{ order.city }}, {{ order.state }} - {{ order.postal_code }}</p>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <h2>No orders found.</h2>
+                        <p>Try a different email address or order number.</p>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
