@@ -77,6 +77,12 @@ pip install -r /home/salewellco/salewell_app/requirements.txt
 python /home/salewellco/salewell_app/manage.py collectstatic --noinput
 ```
 
+## Troubleshooting
+
+- If the error log still shows `imp.load_source('wsgi', 'passenger_wsgi.py')`, the server is still running an older copy of `passenger_wsgi.py`. Deploy again from **Git Version Control** and restart the Python app in **Application Manager**.
+- If the error log mentions paths such as `/opt/alt/python310/bin/lswsgi` or `/home/salewellco/virtualenv/salewell_app/3.10`, your cPanel Python app is still tied to an old Python 3.10 virtualenv. Recreate the Python application with the currently available Python version, reinstall `requirements.txt`, and restart it.
+- The repeated `/usr/bin/python-html2text` messages are usually server-side tooling noise. Focus first on fixing the Python app bootstrap and virtualenv path mismatch above.
+
 ## Important security note
 
 The current `config.yml` file contains live FTP credentials. Do not keep real secrets in Git.
