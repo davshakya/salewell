@@ -5,16 +5,16 @@ from django.utils import timezone
 
 
 class Lead(models.Model):
-    WOMEN = "women"
-    MEN = "men"
-    BOTH = "both"
-    OCCASION = "occasion"
+    HOME = "home"
+    COMMERCIAL = "commercial"
+    INSTALL = "install"
+    DEALER = "dealer"
 
     INTEREST_CHOICES = [
-        (WOMEN, "Women"),
-        (MEN, "Men"),
-        (BOTH, "Women and Men"),
-        (OCCASION, "Festive or Occasion Wear"),
+        (HOME, "Home or Farm Setup"),
+        (COMMERCIAL, "Apartment or Commercial Site"),
+        (INSTALL, "Installation Support"),
+        (DEALER, "Dealer or Bulk Enquiry"),
     ]
 
     name = models.CharField(max_length=120)
@@ -66,7 +66,7 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         if not self.order_number:
             stamp = timezone.now().strftime("%Y%m%d")
-            self.order_number = f"SW-{stamp}-{uuid.uuid4().hex[:6].upper()}"
+            self.order_number = f"SWT-{stamp}-{uuid.uuid4().hex[:6].upper()}"
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:

@@ -4,22 +4,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ page_title|default:"SaleWell" }}</title>
-    <meta name="description" content="SaleWell clothing store for men and women with collections, cart, checkout, and order tracking.">
+    <title>{{ page_title|default:"SaleWell IoT" }}</title>
+    <meta name="description" content="SaleWell IoT sells smart water tank controllers, app-based level monitors, and automation systems for homes, apartments, farms, and commercial sites.">
     <link rel="stylesheet" href="{% static 'assets/css/salewell-store.css' %}">
 </head>
 <body class="store-body">
     <header class="site-header">
         <div class="site-header__inner">
             <a class="brand-mark" href="{% url 'index' %}">
-                <span class="brand-mark__eyebrow">Clothing E-commerce</span>
-                <span class="brand-mark__title">SaleWell</span>
+                <span class="brand-mark__eyebrow">IoT Water Tank Automation</span>
+                <span class="brand-mark__title">SaleWell IoT</span>
             </a>
 
             <nav class="site-nav" aria-label="Primary">
                 <a class="site-nav__link{% if request.path == '/' %} is-active{% endif %}" href="{% url 'index' %}">Home</a>
-                <a class="site-nav__link{% if request.path == '/women/' %} is-active{% endif %}" href="{% url 'women' %}">Women</a>
-                <a class="site-nav__link{% if request.path == '/men/' %} is-active{% endif %}" href="{% url 'men' %}">Men</a>
+                <a class="site-nav__link{% if request.path == '/home-systems/' %} is-active{% endif %}" href="{% url 'residential' %}">Home Systems</a>
+                <a class="site-nav__link{% if request.path == '/site-systems/' %} is-active{% endif %}" href="{% url 'commercial' %}">Site Systems</a>
                 <a class="site-nav__link{% if request.path == '/orders/' %} is-active{% endif %}" href="{% url 'orders' %}">Orders</a>
             </nav>
 
@@ -45,14 +45,14 @@
     <footer class="site-footer">
         <div class="page-shell site-footer__inner">
             <div>
-                <p class="section-kicker">SaleWell</p>
-                <h2>Designed for clothing discovery and checkout.</h2>
-                <p>Men&apos;s and women&apos;s collections, session cart, checkout flow, and saved orders in one compact Django store.</p>
+                <p class="section-kicker">SaleWell IoT</p>
+                <h2>Smart water tank automation for homes, apartments, farms, and practical site installations.</h2>
+                <p>Buy controllers, monitoring kits, and support plans online, then track your order and share installation details with our team.</p>
             </div>
             <div class="footer-links">
                 <a href="{% url 'index' %}">Home</a>
-                <a href="{% url 'women' %}">Women</a>
-                <a href="{% url 'men' %}">Men</a>
+                <a href="{% url 'residential' %}">Home Systems</a>
+                <a href="{% url 'commercial' %}">Site Systems</a>
                 <a href="{% url 'cart' %}">Cart</a>
                 <a href="{% url 'checkout' %}">Checkout</a>
                 <a href="{% url 'orders' %}">Orders</a>

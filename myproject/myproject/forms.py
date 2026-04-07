@@ -5,7 +5,7 @@ from .models import Lead, Order
 
 class LeadForm(forms.ModelForm):
     interest = forms.ChoiceField(
-        choices=[("", "Select a collection")] + Lead.INTEREST_CHOICES,
+        choices=[("", "Select your requirement")] + Lead.INTEREST_CHOICES,
     )
 
     class Meta:
@@ -26,7 +26,7 @@ class LeadForm(forms.ModelForm):
             ),
             "message": forms.Textarea(
                 attrs={
-                    "placeholder": "Tell us the styles, colors, sizes, or occasion you are shopping for.",
+                    "placeholder": "Share tank capacity, motor HP, number of tanks, property type, or installation questions.",
                     "rows": 6,
                 }
             ),
@@ -75,7 +75,7 @@ class CheckoutForm(forms.ModelForm):
             "notes": forms.Textarea(
                 attrs={
                     "rows": 4,
-                    "placeholder": "Preferred size notes, delivery timing, or styling request.",
+                    "placeholder": "Mention tank capacity, motor HP, wiring notes, preferred call time, or installation support needed.",
                 }
             ),
         }
@@ -88,7 +88,7 @@ class OrderLookupForm(forms.Form):
     )
     order_number = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={"placeholder": "Order number, for example SW-20260406-ABC123"}),
+        widget=forms.TextInput(attrs={"placeholder": "Order number, for example SWT-20260407-ABC123"}),
     )
 
     def clean(self):
