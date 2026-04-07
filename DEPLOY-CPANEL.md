@@ -41,6 +41,7 @@ Add these environment variables in the Python application's settings:
 - `DJANGO_CSRF_TRUSTED_ORIGINS=https://salewell.co.in,https://www.salewell.co.in`
 - `DJANGO_DB_PATH=/home/salewellco/salewell_data/db.sqlite3`
 - `DJANGO_TIME_ZONE=Asia/Kolkata`
+- `DJANGO_URL_PREFIX=/app` only if the Python app is mounted at `https://salewell.co.in/app/`
 
 ## 5. Run Django setup commands on the server
 
@@ -79,6 +80,7 @@ python /home/salewellco/salewell_app/manage.py collectstatic --noinput
 
 ## Troubleshooting
 
+- If `https://salewell.co.in/app/` shows **Index of /app/**, LiteSpeed is serving the folder directly and the request is not reaching Django. In that case, fix the cPanel Python application's **Application URL** or recreate the app so Passenger is attached to `/app`.
 - If the error log still shows `imp.load_source('wsgi', 'passenger_wsgi.py')`, the server is still running an older copy of `passenger_wsgi.py`. Deploy again from **Git Version Control** and restart the Python app in **Application Manager**.
 - If the error log mentions paths such as `/opt/alt/python310/bin/lswsgi` or `/home/salewellco/virtualenv/salewell_app/3.10`, your cPanel Python app is still tied to an old Python 3.10 virtualenv. Recreate the Python application with the currently available Python version, reinstall `requirements.txt`, and restart it.
 - The repeated `/usr/bin/python-html2text` messages are usually server-side tooling noise. Focus first on fixing the Python app bootstrap and virtualenv path mismatch above.

@@ -20,6 +20,14 @@ def env_list(name: str, default: list[str]) -> list[str]:
     return [item.strip() for item in value.split(",") if item.strip()]
 
 
+def env_path_prefix(name: str) -> str:
+    value = os.environ.get(name, "").strip()
+    if not value:
+        return ""
+    normalized = "/" + value.strip("/")
+    return "" if normalized == "/" else normalized
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -39,6 +47,9 @@ CSRF_TRUSTED_ORIGINS = env_list(
     "DJANGO_CSRF_TRUSTED_ORIGINS",
     ["https://salewell.co.in", "https://www.salewell.co.in"],
 )
+
+URL_PREFIX = env_path_prefix("DJANGO_URL_PREFIX")
+FORCE_SCRIPT_NAME = URL_PREFIX or None
 
 
 # Application definition
@@ -128,7 +139,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = f"{URL_PREFIX}/static/" if URL_PREFIX else '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 WHITENOISE_AUTOREFRESH = DEBUG

@@ -7,3 +7,5 @@ deployment:
     - /bin/cp passenger_wsgi.py "$DEPLOYPATH/passenger_wsgi.py"
     - /bin/cp requirements.txt "$DEPLOYPATH/requirements.txt"
     - /bin/cp -R myproject "$DEPLOYPATH"
+    - /bin/mkdir -p "$DEPLOYPATH/tmp"
+    - /usr/bin/touch "$DEPLOYPATH/tmp/restart.txt"
