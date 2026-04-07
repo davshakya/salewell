@@ -6,8 +6,8 @@
     <div class="page-shell">
         <div class="section-heading section-heading--left">
             <p class="section-kicker">Cart</p>
-            <h1>Your selected products</h1>
-            <p>Review quantities, update your cart, and continue to checkout.</p>
+            <h1>Your selected solutions</h1>
+            <p>Review your devices, update quantities, and continue to checkout with your delivery and installation details.</p>
         </div>
 
         {% if cart_data.items %}
@@ -64,17 +64,17 @@
                         <span>Total</span>
                         <strong>Rs. {{ cart_data.total|floatformat:0 }}</strong>
                     </div>
-                    <p class="summary-note">Free shipping unlocks at Rs. {{ cart_data.free_shipping_threshold|floatformat:0 }}.</p>
+                    <p class="summary-note">Free shipping unlocks at Rs. {{ cart_data.free_shipping_threshold|floatformat:0 }} on eligible device orders.</p>
                     <a class="button-primary" href="{% url 'checkout' %}">Proceed to Checkout</a>
                 </aside>
             </div>
         {% else %}
             <div class="empty-state">
                 <h2>Your cart is empty.</h2>
-                <p>Browse women&apos;s and men&apos;s products to start building your order.</p>
+                <p>Browse home systems and site systems to start building your smart water tank order.</p>
                 <div class="cta-row">
-                    <a class="button-primary" href="{% url 'women' %}">Shop Women</a>
-                    <a class="button-secondary" href="{% url 'men' %}">Shop Men</a>
+                    <a class="button-primary" href="{% url 'residential' %}">Shop Home Systems</a>
+                    <a class="button-secondary" href="{% url 'commercial' %}">Shop Site Systems</a>
                 </div>
             </div>
         {% endif %}

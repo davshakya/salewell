@@ -1,20 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap");
 
 :root {
-    --bg: #f5efe7;
-    --bg-soft: #fbf7f2;
-    --surface: rgba(255, 251, 246, 0.88);
-    --surface-strong: #fffdf9;
-    --ink: #1f2330;
-    --muted: #5f6472;
-    --line: rgba(31, 35, 48, 0.1);
-    --tan: #b27b52;
-    --clay: #8f5f56;
-    --rose: #b88686;
-    --forest: #415749;
-    --navy: #22293b;
-    --white: #fffdfb;
-    --shadow: 0 24px 60px rgba(38, 28, 23, 0.12);
+    --bg: #eef7fb;
+    --bg-soft: #f7fcfe;
+    --surface: rgba(255, 255, 255, 0.9);
+    --surface-strong: #ffffff;
+    --ink: #17233b;
+    --muted: #5d6a81;
+    --line: rgba(23, 35, 59, 0.1);
+    --tan: #0c8fb2;
+    --clay: #1762a7;
+    --rose: #6fd1db;
+    --forest: #13656f;
+    --navy: #1b2b4a;
+    --white: #f8fdff;
+    --shadow: 0 24px 60px rgba(21, 46, 77, 0.12);
     --radius-lg: 28px;
     --radius-md: 20px;
     --radius-sm: 14px;
@@ -36,8 +36,8 @@ body {
     font-family: "Manrope", sans-serif;
     color: var(--ink);
     background:
-        radial-gradient(circle at top left, rgba(184, 134, 134, 0.22), transparent 26%),
-        radial-gradient(circle at bottom right, rgba(178, 123, 82, 0.18), transparent 24%),
+        radial-gradient(circle at top left, rgba(111, 209, 219, 0.3), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(12, 143, 178, 0.16), transparent 24%),
         var(--bg);
 }
 
@@ -65,7 +65,7 @@ h5,
 h6 {
     margin: 0 0 1rem;
     color: var(--ink);
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
 }
@@ -95,7 +95,7 @@ textarea {
     position: sticky;
     top: 0;
     z-index: 20;
-    background: rgba(245, 239, 231, 0.9);
+    background: rgba(238, 247, 251, 0.92);
     border-bottom: 1px solid rgba(31, 35, 48, 0.08);
     backdrop-filter: blur(16px);
 }
@@ -127,7 +127,7 @@ textarea {
 
 .brand-mark__title {
     font-size: 2.2rem;
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 700;
     color: var(--ink);
 }
@@ -174,7 +174,7 @@ textarea {
 .button-primary {
     color: var(--white);
     background: linear-gradient(135deg, var(--tan), var(--clay));
-    box-shadow: 0 16px 34px rgba(143, 95, 86, 0.22);
+    box-shadow: 0 16px 34px rgba(23, 98, 167, 0.24);
 }
 
 .cart-pill span {
@@ -215,15 +215,15 @@ textarea {
 }
 
 .notice--success {
-    background: rgba(65, 87, 73, 0.12);
+    background: rgba(19, 101, 111, 0.12);
     color: var(--forest);
-    border-color: rgba(65, 87, 73, 0.16);
+    border-color: rgba(19, 101, 111, 0.16);
 }
 
 .notice--info {
-    background: rgba(34, 41, 59, 0.08);
+    background: rgba(23, 98, 167, 0.08);
     color: var(--navy);
-    border-color: rgba(34, 41, 59, 0.12);
+    border-color: rgba(23, 98, 167, 0.12);
 }
 
 .hero {
@@ -231,8 +231,8 @@ textarea {
     overflow: hidden;
     padding: 4rem 0 3rem;
     background:
-        radial-gradient(circle at top right, rgba(178, 123, 82, 0.16), transparent 24%),
-        linear-gradient(135deg, #1d2130 0%, #46363a 42%, #816956 100%);
+        radial-gradient(circle at top right, rgba(111, 209, 219, 0.18), transparent 26%),
+        linear-gradient(135deg, #0c2036 0%, #12456a 50%, #1d8cab 100%);
 }
 
 .hero::before {
@@ -373,7 +373,7 @@ textarea {
     width: 2.4rem;
     height: 2.4rem;
     border-radius: 999px;
-    background: rgba(143, 95, 86, 0.12);
+    background: rgba(23, 98, 167, 0.12);
     color: var(--clay);
     font-weight: 800;
     margin-bottom: 0.8rem;
@@ -403,16 +403,16 @@ textarea {
     background-position: center;
 }
 
-.collection-card--women {
+.collection-card--residential {
     background-image:
-        linear-gradient(180deg, transparent, rgba(20, 18, 23, 0.72)),
-        url("../../images/intro.jpg");
+        linear-gradient(180deg, transparent, rgba(6, 25, 46, 0.72)),
+        url("../../images/iot-residential.svg");
 }
 
-.collection-card--men {
+.collection-card--commercial {
     background-image:
-        linear-gradient(180deg, transparent, rgba(20, 18, 23, 0.72)),
-        url("../../images/one.jpg");
+        linear-gradient(180deg, transparent, rgba(6, 25, 46, 0.72)),
+        url("../../images/iot-commercial.svg");
 }
 
 .collection-card__body {
@@ -479,7 +479,7 @@ textarea {
 }
 
 .badge {
-    background: rgba(178, 123, 82, 0.14);
+    background: rgba(23, 98, 167, 0.14);
     color: var(--clay);
 }
 
@@ -767,7 +767,7 @@ textarea {
 
 .site-footer {
     padding: 2.5rem 0 3rem;
-    background: #1b1f2a;
+    background: #0f1f34;
     color: rgba(255, 255, 255, 0.72);
 }
 

@@ -24,8 +24,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('women/', views.category_page, {"category": "women"}, name='women'),
-    path('men/', views.category_page, {"category": "men"}, name='men'),
+    path('home-systems/', views.category_page, {"category": "residential"}, name='residential'),
+    path('site-systems/', views.category_page, {"category": "commercial"}, name='commercial'),
     path('products/<slug:slug>/', views.product_detail, name='product_detail'),
     path('cart/', views.cart_view, name='cart'),
     path('cart/add/<slug:slug>/', views.add_to_cart_view, name='add_to_cart'),

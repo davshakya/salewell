@@ -9,7 +9,7 @@ class StorefrontTests(TestCase):
         response = self.client.get(reverse("index"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Shop Women")
+        self.assertContains(response, "Shop Home Systems")
         self.assertContains(response, "Checkout")
 
     def test_valid_enquiry_is_saved(self):
@@ -19,8 +19,8 @@ class StorefrontTests(TestCase):
                 "form_type": "lead",
                 "name": "Asha",
                 "email": "asha@example.com",
-                "interest": Lead.WOMEN,
-                "message": "Looking for weekend outfits in neutral tones.",
+                "interest": Lead.HOME,
+                "message": "Need automation for one home tank and a 1 HP pump.",
             },
         )
 
@@ -29,17 +29,17 @@ class StorefrontTests(TestCase):
         self.assertEqual(Lead.objects.count(), 1)
 
     def test_category_and_product_pages_render(self):
-        women_response = self.client.get(reverse("women"))
-        product_response = self.client.get(reverse("product_detail", args=["women-linen-coord-set"]))
+        residential_response = self.client.get(reverse("residential"))
+        product_response = self.client.get(reverse("product_detail", args=["smart-overflow-guard-mini"]))
 
-        self.assertEqual(women_response.status_code, 200)
-        self.assertContains(women_response, "styles available")
+        self.assertEqual(residential_response.status_code, 200)
+        self.assertContains(residential_response, "solutions available")
         self.assertEqual(product_response.status_code, 200)
-        self.assertContains(product_response, "Linen Co-ord Set")
+        self.assertContains(product_response, "Smart Overflow Guard Mini")
 
     def test_checkout_creates_order_and_items(self):
         add_response = self.client.post(
-            reverse("add_to_cart", args=["women-linen-coord-set"]),
+            reverse("add_to_cart", args=["smart-overflow-guard-mini"]),
             {"quantity": 2, "next": reverse("cart")},
         )
         self.assertEqual(add_response.status_code, 302)
@@ -56,7 +56,7 @@ class StorefrontTests(TestCase):
                 "state": "Uttar Pradesh",
                 "postal_code": "285001",
                 "delivery_area": "India",
-                "notes": "Deliver in the afternoon.",
+                "notes": "Single tank setup, 1 HP pump, need installation guidance.",
             },
         )
 

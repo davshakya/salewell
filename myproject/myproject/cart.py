@@ -4,8 +4,8 @@ from .catalog import get_product
 
 
 CART_SESSION_KEY = "salewell_cart"
-FREE_SHIPPING_THRESHOLD = Decimal("2999.00")
-STANDARD_SHIPPING_FEE = Decimal("149.00")
+FREE_SHIPPING_THRESHOLD = Decimal("12000.00")
+STANDARD_SHIPPING_FEE = Decimal("350.00")
 
 
 def get_cart(request):

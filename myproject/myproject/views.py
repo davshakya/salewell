@@ -30,22 +30,22 @@ def index(request):
             lead_form.save()
             messages.success(
                 request,
-                "Your request has been received. SaleWell will follow up with suitable styles and sizing help.",
+                "Your request has been received. SaleWell IoT will follow up with the right water tank setup and installation guidance.",
             )
             return HttpResponseRedirect(f"{reverse('index')}#catalogue-request")
     else:
-        lead_form = LeadForm(initial={"interest": Lead.BOTH})
+        lead_form = LeadForm(initial={"interest": Lead.HOME})
 
     return render(
         request,
         "index.html",
         build_context(
             request,
-            page_title="SaleWell | Fashion for Women and Men",
+            page_title="SaleWell IoT | Smart Water Tank Automation",
             lead_form=lead_form,
             featured_products=featured_products(),
-            women_products=list_products("women")[:3],
-            men_products=list_products("men")[:3],
+            residential_products=list_products("residential")[:3],
+            commercial_products=list_products("commercial")[:3],
         ),
     )
 
@@ -60,7 +60,7 @@ def category_page(request, category):
         "category.html",
         build_context(
             request,
-            page_title=f"SaleWell | {category_meta['title']}",
+            page_title=f"SaleWell IoT | {category_meta['title']}",
             current_category=category,
             category_meta=category_meta,
             products=list_products(category),
@@ -78,7 +78,7 @@ def product_detail(request, slug):
         "product_detail.html",
         build_context(
             request,
-            page_title=f"SaleWell | {product['name']}",
+            page_title=f"SaleWell IoT | {product['name']}",
             product=product,
             add_to_cart_form=AddToCartForm(),
             related_products=related_products(product),
@@ -119,7 +119,7 @@ def cart_view(request):
         "cart.html",
         build_context(
             request,
-            page_title="SaleWell | Your Cart",
+            page_title="SaleWell IoT | Your Cart",
         ),
     )
 
@@ -136,7 +136,7 @@ def remove_from_cart_view(request, slug):
 def checkout(request):
     summary = cart_summary(request)
     if not summary["items"]:
-        messages.info(request, "Your cart is empty. Add some products before checkout.")
+        messages.info(request, "Your cart is empty. Add a smart water tank solution before checkout.")
         return redirect("index")
 
     if request.method == "POST":
@@ -181,7 +181,7 @@ def checkout(request):
         "checkout.html",
         build_context(
             request,
-            page_title="SaleWell | Checkout",
+            page_title="SaleWell IoT | Checkout",
             checkout_form=form,
         ),
     )
@@ -209,7 +209,7 @@ def orders_view(request):
         "orders.html",
         build_context(
             request,
-            page_title="SaleWell | Orders",
+            page_title="SaleWell IoT | Orders",
             order_lookup_form=lookup_form,
             orders=orders,
             show_results=show_results,
