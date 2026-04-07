@@ -13,6 +13,7 @@ for path in (PROJECT_DIR, BASE_DIR):
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
 
-from django.core.wsgi import get_wsgi_application
+# Keep Passenger's entrypoint tiny and reuse Django's canonical WSGI module.
+from myproject.wsgi import application
 
-application = get_wsgi_application()
+app = application
