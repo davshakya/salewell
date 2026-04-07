@@ -47,14 +47,14 @@ Add these environment variables in the Python application's settings:
 Inside the activated virtual environment, run:
 
 ```bash
-python /home/salewellco/salewell_app/myproject/manage.py migrate
-python /home/salewellco/salewell_app/myproject/manage.py collectstatic --noinput
+python /home/salewellco/salewell_app/manage.py migrate
+python /home/salewellco/salewell_app/manage.py collectstatic --noinput
 ```
 
 If you want an admin login:
 
 ```bash
-python /home/salewellco/salewell_app/myproject/manage.py createsuperuser
+python /home/salewellco/salewell_app/manage.py createsuperuser
 ```
 
 ## 6. Deploy from Git Version Control
@@ -74,7 +74,7 @@ If static files or dependencies changed, rerun:
 
 ```bash
 pip install -r /home/salewellco/salewell_app/requirements.txt
-python /home/salewellco/salewell_app/myproject/manage.py collectstatic --noinput
+python /home/salewellco/salewell_app/manage.py collectstatic --noinput
 ```
 
 ## Important security note

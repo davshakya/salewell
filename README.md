@@ -4,8 +4,8 @@ salewell.co.in
 ## Local run
 
 ```powershell
-python myproject\manage.py migrate
-python myproject\manage.py runserver
+python manage.py migrate
+python manage.py runserver
 ```
 
 ## cPanel deployment
